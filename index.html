@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tantangan Jakarta</title>
+    <title>Usebility Testing Satudata Jakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Yamaha DT Motorcycle Club Indonesia">
-    <meta name="keywords" content="yamah dt motor club">
+    <meta name="description" content="Usebility Testing Satudata Jakarta">
+    <meta name="keywords" content="Usebility Testing Satudata Jakarta">
     <meta name="author" content="deni susanto">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 
@@ -110,21 +110,6 @@
             $('.clear6').show()
         }
 
-
-        $( "#submit-biodata" ).submit(function( event ) {
-            event.preventDefault()
-            const url = new URL(window.location.href)
-            const urlParams = new URL(url).searchParams
-            const namaLengkap = urlParams.get('nama_lengkap')
-            if(namaLengkap){
-                $('.clear1').show()
-            } else {
-                url.searchParams.append("nama_lengkap", $('#nama_lengkap').val())
-                window.location.href = url.toString()
-            }
-        })
-        
-
         var SetRatingStar = function() {
             return $star_rating.each(function() {
                 if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
@@ -141,8 +126,74 @@
         });
 
         SetRatingStar();
-        $(document).ready(function() {
 
+        $(document).ready(function() {
+            $( "#submit-biodata" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const namaLengkap = urlParams.get('nama_lengkap')
+                if(namaLengkap){
+                    $('.clear1').show()
+                } else {
+                    url.searchParams.append("nama_lengkap", $('#nama_lengkap').val())
+                    window.location.href = url.toString()
+                }
+            })
+            $( "#button_obj1" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const obj1 = urlParams.get('obj1')
+                if(namaLengkap){
+                    $('.clear2').show()
+                } else {
+                    url.searchParams.append("obj1", $('#value_obj1').val())
+                    window.location.href = url.toString()
+                }
+            })
+            $( "#button_obj2" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const obj1 = urlParams.get('obj2')
+                if(namaLengkap){
+                    $('.clear3').show()
+                } else {
+                    url.searchParams.append("obj2", $('#value_obj2').val())
+                    window.location.href = url.toString()
+                }
+            })
+            $( "#button_obj3" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const obj1 = urlParams.get('obj3')
+                if(namaLengkap){
+                    $('.clear4').show()
+                } else {
+                    url.searchParams.append("obj3", $('#value_obj3').val())
+                    window.location.href = url.toString()
+                }
+            })
+            $( "#button_obj4" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const obj1 = urlParams.get('obj4')
+                if(namaLengkap){
+                    $('.clear5').show()
+                } else {
+                    url.searchParams.append("obj4", $('#value_obj4').val())
+                    window.location.href = url.toString()
+                }
+            })
+            $( "#button_obj5" ).click(function( event ) {
+                const url = new URL(window.location.href)
+                const urlParams = new URL(url).searchParams
+                const obj1 = urlParams.get('obj5')
+                if(namaLengkap){
+                    $('.clear6').show()
+                } else {
+                    url.searchParams.append("obj5", $('#value_obj5').val())
+                    window.location.href = url.toString()
+                }
+            })
         });
       });
     </script>
@@ -173,6 +224,10 @@
                                     <div class="col-12 instruksi">
                                         <b>Berikut langkah menginstall ekstensi perekam layar</b>
                                         <div class="row">
+                                            <div class="col-12">
+                                                <a href="https://chromewebstore.google.com/detail/screen-recorder/hniebljpgcogalllopnjokppmgbhaden"><img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" style="width: 20px;"/> Download Extension Untuk Chrome</a> <br/>
+                                                <a href="https://microsoftedge.microsoft.com/addons/detail/screen-recorder/dpidllmdbfmclpenbdfjkbbipkbbadbg"><img src="https://cdn.icon-icons.com/icons2/2552/PNG/512/edge_browser_logo_icon_152998.png" style="width: 20px;"> Download Extension Untuk Microsoft Edge</a>
+                                            </div>
                                             <div class="col-3">
                                                 <div class="card">
                                                     <b>1</b>
@@ -215,22 +270,14 @@
                                                     <img src="./assets/i7.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>8</b>
-                                                    <img src="./assets/i8.PNG" width="850">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 data-diri">
                                         <b>Masukan nama anda</b>
-                                        <form id="submit-biodata">
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap">
-                                            </div>
-                                            <button class="btn btn-success" type="submit">Simpan</button>
-                                        </form>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+                                        </div>
+                                        <button class="btn btn-success" type="submit" id="submit-biodata">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -261,10 +308,10 @@
                                                 <span class="fa fa-circle" data-rating="8"> 8</span>
                                                 <span class="fa fa-circle" data-rating="9"> 9</span>
                                                 <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj1" value="1"><br>
                                             </div>
                                         </div>
-                                        <button class="btn-success">Simpan</button>
+                                        <button class="btn-success" id="button_obj1">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -295,10 +342,10 @@
                                                 <span class="fa fa-circle" data-rating="8"> 8</span>
                                                 <span class="fa fa-circle" data-rating="9"> 9</span>
                                                 <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj2" value="1"><br>
                                             </div>
                                         </div>
-                                        <button class="btn-success">Simpan</button>
+                                        <button class="btn-success" id="button_obj2">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -330,10 +377,10 @@
                                                 <span class="fa fa-circle" data-rating="8"> 8</span>
                                                 <span class="fa fa-circle" data-rating="9"> 9</span>
                                                 <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj3" value="1"><br>
                                             </div>
                                         </div>
-                                        <button class="btn-success">Simpan</button>
+                                        <button class="btn-success" id="button_obj3">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -364,10 +411,10 @@
                                                 <span class="fa fa-circle" data-rating="8"> 8</span>
                                                 <span class="fa fa-circle" data-rating="9"> 9</span>
                                                 <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj4" value="1"><br>
                                             </div>
                                         </div>
-                                        <button class="btn-success">Simpan</button>
+                                        <button class="btn-success" id="button_obj4">Simpan</button>
                                     </div>
                                 </div>
                             </div>
@@ -398,7 +445,7 @@
                                                 <span class="fa fa-circle" data-rating="8"> 8</span>
                                                 <span class="fa fa-circle" data-rating="9"> 9</span>
                                                 <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj5" value="1"><br>
                                             </div>
                                         </div> <br>
                                         <b>Dalam skala 1 - 10, Seberapa besar keinginan Anda untuk merekomendasikan website Satu Data kepada teman atau kenalan Anda?</b>
@@ -419,7 +466,15 @@
                                         </div> <br>
                                         <textarea placeholder="Apa kendala terbesar yang kamu temui dalam menggunakan website Satu Data Jakarta?"></textarea>
                                         <textarea placeholder="Apa yang perlu kami lakukan untuk meningkatkan kemudahan dalam menggunakan website Satu Data Jakarta?"></textarea>
-                                        <button class="btn-success">Simpan</button>
+                                        <button class="btn-success" id="button_obj5">Simpan</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <b>Setelah selesai harap simpan record video</b>
+                                                <img src="./assets/i8.PNG" width="850">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
