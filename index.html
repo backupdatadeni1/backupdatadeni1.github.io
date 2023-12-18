@@ -21,6 +21,10 @@
         margin-bottom: 20px;
     }
 
+    .card img{
+        width: 100%;
+    }
+
     .nav{
         font-size: 14px;
     }
@@ -78,6 +82,29 @@
         $('.clear5').hide()
         $('.clear6').hide()
 
+        const url = new URL(window.location.href)
+        const urlParams = new URL(url).searchParams
+        const namaLengkap = urlParams.get('nama_lengkap')
+        if(namaLengkap){
+            $('.clear1').show()
+            $('#nama_lengkap').val(namaLengkap)
+        }
+
+
+        $( "#submit-biodata" ).submit(function( event ) {
+            event.preventDefault()
+            const url = new URL(window.location.href)
+            const urlParams = new URL(url).searchParams
+            const namaLengkap = urlParams.get('nama_lengkap')
+            if(namaLengkap){
+                $('.clear1').show()
+            } else {
+                url.searchParams.append("nama_lengkap", $('#nama_lengkap').val())
+                window.location.href = url.toString()
+            }
+        })
+        
+
         var SetRatingStar = function() {
             return $star_rating.each(function() {
                 if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
@@ -126,49 +153,49 @@
                                     <div class="col-12 instruksi">
                                         <b>Berikut langkah menginstall ekstensi perekam layar</b>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>1</b>
                                                     <img src="./assets/i1.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>2</b>
                                                     <img src="./assets/i2.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>3</b>
                                                     <img src="./assets/i3.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>4</b>
                                                     <img src="./assets/i4.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>5</b>
                                                     <img src="./assets/i5.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>6</b>
                                                     <img src="./assets/i6.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>7</b>
                                                     <img src="./assets/i7.PNG" width="850">
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="card">
                                                     <b>8</b>
                                                     <img src="./assets/i8.PNG" width="850">
@@ -177,17 +204,12 @@
                                         </div>
                                     </div>
                                     <div class="col-12 data-diri">
-                                        <b>Masukan data anda</b>
-                                        <form>
+                                        <b>Masukan nama anda</b>
+                                        <form id="submit-biodata">
                                             <div class="mb-3">
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+                                                <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap">
                                             </div>
-                                            <div class="mb-3">
-                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nomor Telepon">
-                                            </div>
+                                            <button class="btn btn-success" type="submit">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
