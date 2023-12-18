@@ -85,9 +85,29 @@
         const url = new URL(window.location.href)
         const urlParams = new URL(url).searchParams
         const namaLengkap = urlParams.get('nama_lengkap')
+        const obj1 = urlParams.get('obj1')
+        const obj2 = urlParams.get('obj2')
+        const obj3 = urlParams.get('obj3')
+        const obj4 = urlParams.get('obj4')
+        const obj5 = urlParams.get('obj5')
         if(namaLengkap){
             $('.clear1').show()
             $('#nama_lengkap').val(namaLengkap)
+        }
+        if(obj1){
+            $('.clear2').show()
+        }
+        if(obj2){
+            $('.clear3').show()
+        }
+        if(obj3){
+            $('.clear4').show()
+        }
+        if(obj4){
+            $('.clear5').show()
+        }
+        if(obj5){
+            $('.clear6').show()
         }
 
 
@@ -244,7 +264,6 @@
                                               <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
                                             </div>
                                         </div>
-                                        <textarea placeholder="kritik dan saran"></textarea>
                                         <button class="btn-success">Simpan</button>
                                     </div>
                                 </div>
@@ -279,7 +298,6 @@
                                               <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
                                             </div>
                                         </div>
-                                        <textarea placeholder="kritik dan saran"></textarea>
                                         <button class="btn-success">Simpan</button>
                                     </div>
                                 </div>
@@ -315,7 +333,6 @@
                                               <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
                                             </div>
                                         </div>
-                                        <textarea placeholder="kritik dan saran"></textarea>
                                         <button class="btn-success">Simpan</button>
                                     </div>
                                 </div>
@@ -350,7 +367,6 @@
                                               <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
                                             </div>
                                         </div>
-                                        <textarea placeholder="kritik dan saran"></textarea>
                                         <button class="btn-success">Simpan</button>
                                     </div>
                                 </div>
