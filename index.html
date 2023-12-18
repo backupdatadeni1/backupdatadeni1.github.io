@@ -20,6 +20,10 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
+
+    .nav{
+        font-size: 14px;
+    }
     
     .instruksi{
         margin-top: 10px;
@@ -67,6 +71,13 @@
       $(function(){
         var $star_rating = $('.star-rating .fa');
 
+        $('.clear1').hide()
+        $('.clear2').hide()
+        $('.clear3').hide()
+        $('.clear4').hide()
+        $('.clear5').hide()
+        $('.clear6').hide()
+
         var SetRatingStar = function() {
             return $star_rating.each(function() {
                 if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
@@ -97,12 +108,12 @@
                     <div class="card-body">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-1-tab" data-toggle="tab" data-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">Pendahuluan</button>
-                                <button class="nav-link" id="nav-2-tab" data-toggle="tab" data-target="#nav-2" type="button" role="tab" aria-controls="nav-3" aria-selected="true">Objektif 1</button>
-                                <button class="nav-link" id="nav-3-tab" data-toggle="tab" data-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">Objektif 2</button>
-                                <button class="nav-link" id="nav-4-tab" data-toggle="tab" data-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">Objektif 3</button>
-                                <button class="nav-link" id="nav-5-tab" data-toggle="tab" data-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">Objektif 4</button>
-                                <button class="nav-link" id="nav-6-tab" data-toggle="tab" data-target="#nav-6" type="button" role="tab" aria-controls="nav-6" aria-selected="false">Objektif 5</button>
+                                <button class="nav-link active" id="nav-1-tab" data-toggle="tab" data-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">Pendahuluan <i class="fa fa-check-circle clear1" aria-hidden="true" style="color:green"></i></button>
+                                <button class="nav-link" id="nav-2-tab" data-toggle="tab" data-target="#nav-2" type="button" role="tab" aria-controls="nav-3" aria-selected="true">Objektif 1 <i class="fa fa-check-circle clear2" aria-hidden="true" style="color:green"></i></button>
+                                <button class="nav-link" id="nav-3-tab" data-toggle="tab" data-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">Objektif 2 <i class="fa fa-check-circle clear3" aria-hidden="true" style="color:green"></i></button>
+                                <button class="nav-link" id="nav-4-tab" data-toggle="tab" data-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">Objektif 3 <i class="fa fa-check-circle clear4" aria-hidden="true" style="color:green"></i></button>
+                                <button class="nav-link" id="nav-5-tab" data-toggle="tab" data-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">Objektif 4 <i class="fa fa-check-circle clear5" aria-hidden="true" style="color:green"></i></button>
+                                <button class="nav-link" id="nav-6-tab" data-toggle="tab" data-target="#nav-6" type="button" role="tab" aria-controls="nav-6" aria-selected="false">Objektif 5 <i class="fa fa-check-circle clear6" aria-hidden="true" style="color:green"></i></button>
                             </div>
                           </nav>
                           <div class="tab-content" id="nav-tabContent">
