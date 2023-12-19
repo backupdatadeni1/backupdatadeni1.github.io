@@ -98,12 +98,16 @@
                 top: 4px;
                 padding: 10px 25px;
                 border-radius: 2px 2px 0 0;
-                background: white;
+                background: rgb(255, 255, 255);
                 color: black;
                 opacity: 0.7;
                 transition: all 0.1s ease-in-out;
             }
-            .nav-mytabs a.active,
+            .nav-mytabs a.active{
+                background-color: #465cc0;
+                color: white;
+                padding: 10px;
+            }
             .nav-mytabs a:hover {
                 opacity: 1;
                 top: 0;
@@ -197,6 +201,9 @@
                     $(".clear6").show();
                     $("#button_obj5").prop('disabled', true);
                     $('.hasil-obj5').text(localStorage.getItem('obj5'))
+                    $('.hasil-obj6').text(localStorage.getItem('obj6'))
+                    $('.hasil-saran1').text(localStorage.getItem('saran1'))
+                    $('.hasil-saran2').text(localStorage.getItem('saran2'))
                     $("#hapus-sesi").show();
                 }
 
@@ -256,6 +263,10 @@
                     });
                     $("#button_obj5").click(function (event) {
                         localStorage.setItem("obj5", $("#value_obj5").val());
+                        localStorage.setItem("obj6", $("#value_obj6").val());
+                        localStorage.setItem("saran1", $("#saran1").val());
+                        localStorage.setItem("saran2", $("#saran2").val());
+                        
                         const url = rootDomain(window.location.href)
                         location.href = url+'#objective5'
                         location.reload()
@@ -276,7 +287,8 @@
                             objective2:localStorage.getItem('obj2'),
                             objective3:localStorage.getItem('obj3'),
                             objective4:localStorage.getItem('obj4'),
-                            objective5:localStorage.getItem('obj5')
+                            objective5:[localStorage.getItem('obj5'),localStorage.getItem('obj6'),localStorage.getItem('saran1'),localStorage.getItem('saran2')],
+                            
                         }
                         let url = "https://api.telegram.org/"+telegram_bot_id+"/sendMessage?chat_id="+chatId+"&text="+JSON.stringify(hasilUji)
                         axios.get(url).then(function (response) {
@@ -569,22 +581,22 @@
                                             <b>Dalam skala 1 - 10, Seberapa besar keinginan Anda untuk merekomendasikan website Satu Data kepada teman atau kenalan Anda?</b>
                                             <div class="rating-recomend">
                                                 <div class="star-rating-recomend">
-                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating-recomend="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating-recomend="10"> 10 Sangat Mudah</span>
                                                     <input type="hidden" name="value-rating-recomend" class="rating-value-recomend" id="value_obj6" value="1" /><br />
                                                 </div>
                                             </div>
                                             <br />
-                                            <textarea placeholder="Apa kendala terbesar yang kamu temui dalam menggunakan website Satu Data Jakarta?"></textarea>
-                                            <textarea placeholder="Apa yang perlu kami lakukan untuk meningkatkan kemudahan dalam menggunakan website Satu Data Jakarta?"></textarea>
+                                            <textarea placeholder="Apa kendala terbesar yang kamu temui dalam menggunakan website Satu Data Jakarta?" id="saran1"></textarea>
+                                            <textarea placeholder="Apa yang perlu kami lakukan untuk meningkatkan kemudahan dalam menggunakan website Satu Data Jakarta?" id="saran2"></textarea>
                                             <button class="btn-success" id="button_obj5">Simpan</button>
                                         </div>
                                         <div class="col-12">
@@ -604,7 +616,7 @@
                                                             <li>Objective 2: <span class="hasil-obj2"></span></li>
                                                             <li>Objective 3: <span class="hasil-obj3"></span></li>
                                                             <li>Objective 4: <span class="hasil-obj4"></span></li>
-                                                            <li>Objective 5: <span class="hasil-obj5"></span></li>
+                                                            <li>Objective 5: <span class="hasil-obj5"></span>, <span class="hasil-obj6"></span>, <span class="hasil-saran1"></span>, <span class="hasil-saran2"></span></li>
                                                         </ul>
                                                         silahkan upload file anda melalui
                                                         <button class="btn btn-primary" id="kirim-telegram">Kirim Video Melalui Telegram</button>
