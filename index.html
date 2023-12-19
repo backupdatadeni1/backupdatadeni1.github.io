@@ -13,12 +13,14 @@
         <script src="js/jquery-3.5.1.slim.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <style>
             .apps .card {
                 border-radius: 20px;
                 margin-top: 10px;
                 margin-bottom: 20px;
+                padding: 10px;
             }
 
             .card img {
@@ -47,6 +49,16 @@
             }
 
             .star-rating .fa-circle {
+                color: rgb(0, 136, 34);
+            }
+
+            .star-rating-recomend {
+                line-height: 32px;
+                font-size: 1.25em;
+                margin-bottom: 10px;
+            }
+
+            .star-rating-recomend .fa-circle {
                 color: rgb(0, 136, 34);
             }
 
@@ -103,10 +115,45 @@
                 border-radius: 0 4px 4px 4px;
                 background: white;
             }
+            textarea{
+                padding: 10px;
+            }
         </style>
         <script type="text/javascript">
             $(function () {
                 var $star_rating = $(".star-rating .fa");
+                var SetRatingStar = function () {
+                    return $star_rating.each(function () {
+                        if (parseInt($star_rating.siblings("input.rating-value").val()) >= parseInt($(this).data("rating"))) {
+                            return $(this).removeClass("fa-circle-o").addClass("fa-circle");
+                        } else {
+                            return $(this).removeClass("fa-circle").addClass("fa-circle-o");
+                        }
+                    });
+                };
+                $star_rating.on("click", function () {
+                    $star_rating.siblings("input.rating-value").val($(this).data("rating"));
+                    return SetRatingStar();
+                });
+                SetRatingStar();
+
+                var $star_rating_recomend = $(".star-rating-recomend .fa");
+                var SetRatingStarrecomend = function () {
+                    return $star_rating_recomend.each(function () {
+                        if (parseInt($star_rating_recomend.siblings("input.rating-value-recomend").val()) >= parseInt($(this).data("rating-recomend"))) {
+                            return $(this).removeClass("fa-circle-o").addClass("fa-circle");
+                        } else {
+                            return $(this).removeClass("fa-circle").addClass("fa-circle-o");
+                        }
+                    });
+                };
+                $star_rating_recomend.on("click", function () {
+                    $star_rating_recomend.siblings("input.rating-value-recomend").val($(this).data("rating-recomend"));
+                    return SetRatingStarrecomend();
+                });
+                SetRatingStarrecomend();
+
+
 
                 $(".clear1").hide();
                 $(".clear2").hide();
@@ -125,25 +172,31 @@
                 if(localStorage.getItem('obj1')){
                     $(".clear2").show();
                     $("#button_obj1").prop('disabled', true);
+                    $('.hasil-obj1').text(localStorage.getItem('obj1'))
+
                 }
                 if(localStorage.getItem('obj2')){
                     $(".clear3").show();
                     $("#button_obj2").prop('disabled', true);
+                    $('.hasil-obj2').text(localStorage.getItem('obj2'))
                 }
 
                 if(localStorage.getItem('obj3')){
                     $(".clear4").show();
                     $("#button_obj3").prop('disabled', true);
+                    $('.hasil-obj3').text(localStorage.getItem('obj3'))
                 }
 
                 if(localStorage.getItem('obj4')){
                     $(".clear5").show();
                     $("#button_obj4").prop('disabled', true);
+                    $('.hasil-obj4').text(localStorage.getItem('obj4'))
                 }
 
                 if(localStorage.getItem('obj5')){
                     $(".clear6").show();
                     $("#button_obj5").prop('disabled', true);
+                    $('.hasil-obj5').text(localStorage.getItem('obj5'))
                     $("#hapus-sesi").show();
                 }
 
@@ -169,23 +222,6 @@
                     newUrl += "/";
                     history.replaceState(null, null, newUrl);
                 });
-
-                var SetRatingStar = function () {
-                    return $star_rating.each(function () {
-                        if (parseInt($star_rating.siblings("input.rating-value").val()) >= parseInt($(this).data("rating"))) {
-                            return $(this).removeClass("fa-circle-o").addClass("fa-circle");
-                        } else {
-                            return $(this).removeClass("fa-circle").addClass("fa-circle-o");
-                        }
-                    });
-                };
-
-                $star_rating.on("click", function () {
-                    $star_rating.siblings("input.rating-value").val($(this).data("rating"));
-                    return SetRatingStar();
-                });
-
-                SetRatingStar();
 
                 $(document).ready(function () {
                     $("#submit-biodata").click(function (event) {
@@ -231,6 +267,21 @@
                     function rootDomain(hostname) {
                         return hostname.split('#')[0];
                     }
+                    $('#kirim-telegram').click(function (event) {
+                        let telegram_bot_id = 'bot6859690581:AAHsZQCPXdu3VamfuhCNQVcSuR6YGbMZEgQ'
+                        let chatId = '5069083267'
+                        let hasilUji = {
+                            objective1:localStorage.getItem('obj1'),
+                            objective2:localStorage.getItem('obj2'),
+                            objective3:localStorage.getItem('obj3'),
+                            objective4:localStorage.getItem('obj4'),
+                            objective5:localStorage.getItem('obj5')
+                        }
+                        let url = "https://api.telegram.org/"+telegram_bot_id+"/sendMessage?chat_id="+chatId+"&text="+JSON.stringify(hasilUji)
+                        axios.get(url).then(function (response) {
+                            alert('berhasil terkirim')
+                        })
+                    })
                 });
             });
         </script>
@@ -515,8 +566,8 @@
                                             </div>
                                             <br />
                                             <b>Dalam skala 1 - 10, Seberapa besar keinginan Anda untuk merekomendasikan website Satu Data kepada teman atau kenalan Anda?</b>
-                                            <div class="rating">
-                                                <div class="star-rating">
+                                            <div class="rating-recomend">
+                                                <div class="star-rating-recomend">
                                                     <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
                                                     <span class="fa fa-circle" data-rating="2"> 2</span>
                                                     <span class="fa fa-circle" data-rating="3"> 3</span>
@@ -527,7 +578,7 @@
                                                     <span class="fa fa-circle" data-rating="8"> 8</span>
                                                     <span class="fa fa-circle" data-rating="9"> 9</span>
                                                     <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                                    <input type="hidden" name="value-rating" class="rating-value" value="1" /><br />
+                                                    <input type="hidden" name="value-rating-recomend" class="rating-value-recomend" id="value_obj6" value="1" /><br />
                                                 </div>
                                             </div>
                                             <br />
@@ -536,12 +587,28 @@
                                             <button class="btn-success" id="button_obj5">Simpan</button>
                                         </div>
                                         <div class="col-12">
-                                            <div class="col-6">
-                                                <div class="card">
-                                                    <b>Setelah selesai harap simpan record video</b>
-                                                    <img src="./assets/i8.PNG" width="850" />
+                                            <dov class="row">
+                                                <div class="col-6">
+                                                    <div class="card">
+                                                        <b>Setelah selesai harap simpan record video</b>
+                                                        <img src="./assets/i8.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-6">
+                                                    <div class="card">
+                                                        <b>Kirim video hasil percobaan usability testing</b>
+                                                        hasil percobaan usability testing:
+                                                        <ul>
+                                                            <li>Objective 1: <span class="hasil-obj1"></span></li>
+                                                            <li>Objective 2: <span class="hasil-obj2"></span></li>
+                                                            <li>Objective 3: <span class="hasil-obj3"></span></li>
+                                                            <li>Objective 4: <span class="hasil-obj4"></span></li>
+                                                            <li>Objective 5: <span class="hasil-obj5"></span></li>
+                                                        </ul>
+                                                        <button class="btn btn-primary" id="kirim-telegram">Kirim Video Melalui Telegram</button>
+                                                    </div>
+                                                </div>
+                                            </dov>
                                         </div>
                                     </div>
                                 </div>
