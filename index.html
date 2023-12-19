@@ -1,488 +1,555 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Usebility Testing Satudata Jakarta</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Usebility Testing Satudata Jakarta">
-    <meta name="keywords" content="Usebility Testing Satudata Jakarta">
-    <meta name="author" content="deni susanto">
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <head>
+        <title>Usebility Testing Satudata Jakarta</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Usebility Testing Satudata Jakarta" />
+        <meta name="keywords" content="Usebility Testing Satudata Jakarta" />
+        <meta name="author" content="deni susanto" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.5.1.slim.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css" />
 
-    <style>
-    .apps .card{
-        border-radius: 20px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
+        <style>
+            .apps .card {
+                border-radius: 20px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
 
-    .card img{
-        width: 100%;
-    }
+            .card img {
+                width: 100%;
+            }
 
-    .nav{
-        font-size: 14px;
-    }
-    
-    .instruksi{
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+            .instruksi {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
 
-    .iframe{
-        width: 100%;
-        min-height: 850px;
-    }
+            .iframe {
+                width: 100%;
+                min-height: 850px;
+            }
 
-    .penilaian{
-        margin-top: 10px;
-        margin-bottom: 10px; 
-    }
-    
-    .star-rating {
-        line-height:32px;
-        font-size:1.25em;
-        margin-bottom: 10px;
-    }
+            .penilaian {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
 
-    .star-rating .fa-circle{color: rgb(0, 136, 34);}
+            .star-rating {
+                line-height: 32px;
+                font-size: 1.25em;
+                margin-bottom: 10px;
+            }
 
-    textarea{
-        width: 100%;
-        min-height: 120px;
-    }
+            .star-rating .fa-circle {
+                color: rgb(0, 136, 34);
+            }
 
-    .btn-success{
-        margin-top: 10px;
-        width: 150px;
-        padding: 5px;
-        border: none;
-        border-radius: 10px;
-    }
+            textarea {
+                width: 100%;
+                min-height: 120px;
+            }
 
-    input{
-        border: none;
-    }
-    
+            .btn-success {
+                margin-top: 10px;
+                width: 150px;
+                padding: 5px;
+                border: none;
+                border-radius: 10px;
+            }
 
-    </style>
-    <script type="text/javascript">
-      $(function(){
-        var $star_rating = $('.star-rating .fa');
+            .btn-danger {
+                margin-top: 10px;
+                width: 150px;
+                padding: 5px;
+                border: none;
+                border-radius: 10px;
+            }
 
-        $('.clear1').hide()
-        $('.clear2').hide()
-        $('.clear3').hide()
-        $('.clear4').hide()
-        $('.clear5').hide()
-        $('.clear6').hide()
+            input {
+                border: none;
+            }
 
-        const url = new URL(window.location.href)
-        const urlParams = new URL(url).searchParams
-        const namaLengkap = urlParams.get('nama_lengkap')
-        const obj1 = urlParams.get('obj1')
-        const obj2 = urlParams.get('obj2')
-        const obj3 = urlParams.get('obj3')
-        const obj4 = urlParams.get('obj4')
-        const obj5 = urlParams.get('obj5')
-        if(namaLengkap){
-            $('.clear1').show()
-            $('#nama_lengkap').val(namaLengkap)
-        }
-        if(obj1){
-            $('.clear2').show()
-        }
-        if(obj2){
-            $('.clear3').show()
-        }
-        if(obj3){
-            $('.clear4').show()
-        }
-        if(obj4){
-            $('.clear5').show()
-        }
-        if(obj5){
-            $('.clear6').show()
-        }
+            .nav-mytabs {
+                margin-top: 2rem;
+            }
+            .nav-mytabs li:not(:last-child) {
+                margin-right: 7px;
+            }
+            .nav-mytabs a {
+                position: relative;
+                top: 4px;
+                padding: 10px 25px;
+                border-radius: 2px 2px 0 0;
+                background: white;
+                color: black;
+                opacity: 0.7;
+                transition: all 0.1s ease-in-out;
+            }
+            .nav-mytabs a.active,
+            .nav-mytabs a:hover {
+                opacity: 1;
+                top: 0;
+            }
+            .mytab-content {
+                position: relative;
+                z-index: 2;
+                padding: 25px;
+                border-radius: 0 4px 4px 4px;
+                background: white;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                var $star_rating = $(".star-rating .fa");
 
-        var SetRatingStar = function() {
-            return $star_rating.each(function() {
-                if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                return $(this).removeClass('fa-circle-o').addClass('fa-circle');
-                } else {
-                return $(this).removeClass('fa-circle').addClass('fa-circle-o');
+                $(".clear1").hide();
+                $(".clear2").hide();
+                $(".clear3").hide();
+                $(".clear4").hide();
+                $(".clear5").hide();
+                $(".clear6").hide();
+                $("#hapus-sesi").hide();
+
+                if(localStorage.getItem('nama_lengkap')){
+                    $(".clear1").show();
+                    $("#nama_lengkap").val(localStorage.getItem('nama_lengkap'));
+                    $("#nama_lengkap").prop('disabled', true);
+                    $("#submit-biodata").prop('disabled', true);
                 }
+                if(localStorage.getItem('obj1')){
+                    $(".clear2").show();
+                    $("#button_obj1").prop('disabled', true);
+                }
+                if(localStorage.getItem('obj2')){
+                    $(".clear3").show();
+                    $("#button_obj2").prop('disabled', true);
+                }
+
+                if(localStorage.getItem('obj3')){
+                    $(".clear4").show();
+                    $("#button_obj3").prop('disabled', true);
+                }
+
+                if(localStorage.getItem('obj4')){
+                    $(".clear5").show();
+                    $("#button_obj4").prop('disabled', true);
+                }
+
+                if(localStorage.getItem('obj5')){
+                    $(".clear6").show();
+                    $("#button_obj5").prop('disabled', true);
+                    $("#hapus-sesi").show();
+                }
+
+
+                let url = location.href.replace(/\/$/, "");
+                if (location.hash) {
+                    const hash = url.split("#");
+                    $('#myTab a[href="#' + hash[1] + '"]').tab("show");
+                    url = location.href.replace(/\/#/, "#");
+                    history.replaceState(null, null, url);
+                    setTimeout(() => {
+                        $(window).scrollTop(0);
+                    }, 400);
+                }
+                $('a[data-toggle="tab"]').on("click", function () {
+                    let newUrl;
+                    const hash = $(this).attr("href");
+                    if (hash == "#home") {
+                        newUrl = url.split("#")[0];
+                    } else {
+                        newUrl = url.split("#")[0] + hash;
+                    }
+                    newUrl += "/";
+                    history.replaceState(null, null, newUrl);
+                });
+
+                var SetRatingStar = function () {
+                    return $star_rating.each(function () {
+                        if (parseInt($star_rating.siblings("input.rating-value").val()) >= parseInt($(this).data("rating"))) {
+                            return $(this).removeClass("fa-circle-o").addClass("fa-circle");
+                        } else {
+                            return $(this).removeClass("fa-circle").addClass("fa-circle-o");
+                        }
+                    });
+                };
+
+                $star_rating.on("click", function () {
+                    $star_rating.siblings("input.rating-value").val($(this).data("rating"));
+                    return SetRatingStar();
+                });
+
+                SetRatingStar();
+
+                $(document).ready(function () {
+                    $("#submit-biodata").click(function (event) {
+                        localStorage.setItem("nama_lengkap", $("#nama_lengkap").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective1'
+                        location.reload()
+                    });
+                    $("#button_obj1").click(function (event) {
+                        localStorage.setItem("obj1", $("#value_obj1").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective2'
+                        location.reload()
+                    });
+                    $("#button_obj2").click(function (event) {
+                        localStorage.setItem("obj2", $("#value_obj2").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective3'
+                        location.reload()
+                    });
+                    $("#button_obj3").click(function (event) {
+                        localStorage.setItem("obj3", $("#value_obj3").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective4'
+                        location.reload()
+                    });
+                    $("#button_obj4").click(function (event) {
+                        localStorage.setItem("obj4", $("#value_obj4").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective5'
+                        location.reload()
+                    });
+                    $("#button_obj5").click(function (event) {
+                        localStorage.setItem("obj5", $("#value_obj5").val());
+                        const url = rootDomain(window.location.href)
+                        location.href = url+'#objective5'
+                        location.reload()
+                    });
+                    $("#hapus-sesi").click(function (event) {
+                        localStorage.clear()
+                        location.reload()
+                    })
+                    function rootDomain(hostname) {
+                        return hostname.split('#')[0];
+                    }
+                });
             });
-        };
-
-        $star_rating.on('click', function() {
-        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-        return SetRatingStar();
-        });
-
-        SetRatingStar();
-
-        $(document).ready(function() {
-            $( "#submit-biodata" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const namaLengkap = urlParams.get('nama_lengkap')
-                if(namaLengkap){
-                    $('.clear1').show()
-                } else {
-                    url.searchParams.append("nama_lengkap", $('#nama_lengkap').val())
-                    window.location.href = url.toString()
-                }
-            })
-            $( "#button_obj1" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const obj1 = urlParams.get('obj1')
-                if(namaLengkap){
-                    $('.clear2').show()
-                } else {
-                    url.searchParams.append("obj1", $('#value_obj1').val())
-                    window.location.href = url.toString()
-                }
-            })
-            $( "#button_obj2" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const obj1 = urlParams.get('obj2')
-                if(namaLengkap){
-                    $('.clear3').show()
-                } else {
-                    url.searchParams.append("obj2", $('#value_obj2').val())
-                    window.location.href = url.toString()
-                }
-            })
-            $( "#button_obj3" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const obj1 = urlParams.get('obj3')
-                if(namaLengkap){
-                    $('.clear4').show()
-                } else {
-                    url.searchParams.append("obj3", $('#value_obj3').val())
-                    window.location.href = url.toString()
-                }
-            })
-            $( "#button_obj4" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const obj1 = urlParams.get('obj4')
-                if(namaLengkap){
-                    $('.clear5').show()
-                } else {
-                    url.searchParams.append("obj4", $('#value_obj4').val())
-                    window.location.href = url.toString()
-                }
-            })
-            $( "#button_obj5" ).click(function( event ) {
-                const url = new URL(window.location.href)
-                const urlParams = new URL(url).searchParams
-                const obj1 = urlParams.get('obj5')
-                if(namaLengkap){
-                    $('.clear6').show()
-                } else {
-                    url.searchParams.append("obj5", $('#value_obj5').val())
-                    window.location.href = url.toString()
-                }
-            })
-        });
-      });
-    </script>
-  </head>
-  <body class="apps">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-1-tab" data-toggle="tab" data-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">Pendahuluan <i class="fa fa-check-circle clear1" aria-hidden="true" style="color:green"></i></button>
-                                <button class="nav-link" id="nav-2-tab" data-toggle="tab" data-target="#nav-2" type="button" role="tab" aria-controls="nav-3" aria-selected="true">Objektif 1 <i class="fa fa-check-circle clear2" aria-hidden="true" style="color:green"></i></button>
-                                <button class="nav-link" id="nav-3-tab" data-toggle="tab" data-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">Objektif 2 <i class="fa fa-check-circle clear3" aria-hidden="true" style="color:green"></i></button>
-                                <button class="nav-link" id="nav-4-tab" data-toggle="tab" data-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">Objektif 3 <i class="fa fa-check-circle clear4" aria-hidden="true" style="color:green"></i></button>
-                                <button class="nav-link" id="nav-5-tab" data-toggle="tab" data-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">Objektif 4 <i class="fa fa-check-circle clear5" aria-hidden="true" style="color:green"></i></button>
-                                <button class="nav-link" id="nav-6-tab" data-toggle="tab" data-target="#nav-6" type="button" role="tab" aria-controls="nav-6" aria-selected="false">Objektif 5 <i class="fa fa-check-circle clear6" aria-hidden="true" style="color:green"></i></button>
-                            </div>
-                          </nav>
-                          <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Pendahuluan:</h4>
-                                        <b>Persiapan sebelum melakukan usability testing</b>
-                                    </div>
-                                    <div class="col-12 instruksi">
-                                        <b>Berikut langkah menginstall ekstensi perekam layar</b>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <a href="https://chromewebstore.google.com/detail/screen-recorder/hniebljpgcogalllopnjokppmgbhaden"><img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" style="width: 20px;"/> Download Extension Untuk Chrome</a> <br/>
-                                                <a href="https://microsoftedge.microsoft.com/addons/detail/screen-recorder/dpidllmdbfmclpenbdfjkbbipkbbadbg"><img src="https://cdn.icon-icons.com/icons2/2552/PNG/512/edge_browser_logo_icon_152998.png" style="width: 20px;"> Download Extension Untuk Microsoft Edge</a>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>1</b>
-                                                    <img src="./assets/i1.PNG" width="850">
+        </script>
+    </head>
+    <body class="apps">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-mytabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                                        Home <i class="fa fa-check-circle clear1" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="objective1-tab" data-toggle="tab" href="#objective1" role="tab" aria-controls="objective1" aria-selected="false">
+                                        Objective 1 <i class="fa fa-check-circle clear2" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="objective2-tab" data-toggle="tab" href="#objective2" role="tab" aria-controls="objective2" aria-selected="false">
+                                        Objective 2 <i class="fa fa-check-circle clear3" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="objective3-tab" data-toggle="tab" href="#objective3" role="tab" aria-controls="objective3" aria-selected="false">
+                                        Objective 3 <i class="fa fa-check-circle clear4" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="objective4-tab" data-toggle="tab" href="#objective4" role="tab" aria-controls="objective4" aria-selected="false">
+                                        Objective 4 <i class="fa fa-check-circle clear5" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="objective5-tab" data-toggle="tab" href="#objective5" role="tab" aria-controls="objective5" aria-selected="false">
+                                        Objective 5 <i class="fa fa-check-circle clear6" aria-hidden="true" style="color: green;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mytab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Pendahuluan:</h4>
+                                            <b>Persiapan sebelum melakukan usability testing</b>
+                                        </div>
+                                        <div class="col-12 instruksi">
+                                            <b>Berikut langkah menginstall ekstensi perekam layar</b>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="https://chromewebstore.google.com/detail/screen-recorder/hniebljpgcogalllopnjokppmgbhaden">
+                                                        <img src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/chrome.png" style="width: 20px;" /> Download Extension Untuk Chrome
+                                                    </a>
+                                                    <br />
+                                                    <a href="https://microsoftedge.microsoft.com/addons/detail/screen-recorder/dpidllmdbfmclpenbdfjkbbipkbbadbg">
+                                                        <img src="https://cdn.icon-icons.com/icons2/2552/PNG/512/edge_browser_logo_icon_152998.png" style="width: 20px;" /> Download Extension Untuk Microsoft Edge
+                                                    </a>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>2</b>
-                                                    <img src="./assets/i2.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>1</b>
+                                                        <img src="./assets/i1.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>3</b>
-                                                    <img src="./assets/i3.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>2</b>
+                                                        <img src="./assets/i2.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>4</b>
-                                                    <img src="./assets/i4.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>3</b>
+                                                        <img src="./assets/i3.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>5</b>
-                                                    <img src="./assets/i5.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>4</b>
+                                                        <img src="./assets/i4.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>6</b>
-                                                    <img src="./assets/i6.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>5</b>
+                                                        <img src="./assets/i5.PNG" width="850" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <b>7</b>
-                                                    <img src="./assets/i7.PNG" width="850">
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>6</b>
+                                                        <img src="./assets/i6.PNG" width="850" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="card">
+                                                        <b>7</b>
+                                                        <img src="./assets/i7.PNG" width="850" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 data-diri">
-                                        <b>Masukan nama anda</b>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+                                        <div class="col-12 data-diri">
+                                            <b>Masukan nama anda</b>
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap" />
+                                            </div>
+                                            <button class="btn btn-success" type="submit" id="submit-biodata">Simpan</button>
+                                            <button class="btn btn-danger" type="submit" id="hapus-sesi">Hapus Semua Sesi</button>
                                         </div>
-                                        <button class="btn btn-success" type="submit" id="submit-biodata">Simpan</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade show" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Instruksi:</h4>
-                                        <b>
-                                            Anda adalah seorang mahasiswa yang sedang mencari data untuk menyelesaikan tugas akhir mengenai perkembangan di Jakarta. <br>
-                                            Anda sedang membuka website Satu Data Jakarta dan ingin mencari series dataset “Data Ekspor Impor DKI Jakarta”. <br>
-                                            Bagaimana Anda melakukannya?
-                                        </b>
-                                    </div>
-                                    <div class="col-12">
-                                        <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
-                                    </div>
-                                    <div class="col-12 penilaian">
-                                        <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj1" value="1"><br>
-                                            </div>
+                                <div class="tab-pane fade" id="objective1" role="tabpanel" aria-labelledby="objective1-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Instruksi:</h4>
+                                            <b>
+                                                Anda adalah seorang mahasiswa yang sedang mencari data untuk menyelesaikan tugas akhir mengenai perkembangan di Jakarta. <br />
+                                                Anda sedang membuka website Satu Data Jakarta dan ingin mencari series dataset “Data Ekspor Impor DKI Jakarta”. <br />
+                                                Bagaimana Anda melakukannya?
+                                            </b>
                                         </div>
-                                        <button class="btn-success" id="button_obj1">Simpan</button>
+                                        <div class="col-12">
+                                            <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
+                                        </div>
+                                        <div class="col-12 penilaian">
+                                            <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" id="value_obj1" value="1" /><br />
+                                                </div>
+                                            </div>
+                                            <button class="btn-success" id="button_obj1">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade show" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Instruksi:</h4>
-                                        <b>
-                                            Kembali ke Home. <br>
-                                            Anda adalah seorang mahasiswa yang sedang mencari 'dashboard' mengenai 'Kemacetan di DKI Jakarta'. <br>
-                                            Bagaimana Anda melakukannya?
-                                        </b>
-                                    </div>
-                                    <div class="col-12">
-                                        <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
-                                    </div>
-                                    <div class="col-12 penilaian">
-                                        <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj2" value="1"><br>
-                                            </div>
+                                <div class="tab-pane fade" id="objective2" role="tabpanel" aria-labelledby="objective2-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Instruksi:</h4>
+                                            <b>
+                                                Kembali ke Home. <br />
+                                                Anda adalah seorang mahasiswa yang sedang mencari 'dashboard' mengenai 'Kemacetan di DKI Jakarta'. <br />
+                                                Bagaimana Anda melakukannya?
+                                            </b>
                                         </div>
-                                        <button class="btn-success" id="button_obj2">Simpan</button>
+                                        <div class="col-12">
+                                            <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
+                                        </div>
+                                        <div class="col-12 penilaian">
+                                            <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" id="value_obj2" value="1" /><br />
+                                                </div>
+                                            </div>
+                                            <button class="btn-success" id="button_obj2">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade show" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Instruksi:</h4>
-                                        <b>
-                                            Kembali ke Home. <br>
-                                            Masuk ke halaman 'Pencarian' atau 'Search'. <br>
-                                            Anda sedang mencari semua informasi dari Organisasi 'Dinas Komunikasi Informasi dan Statistik'. <br>
-                                            Bagaimana Anda melakukannya?
-                                        </b>
-                                    </div>
-                                    <div class="col-12">
-                                        <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
-                                    </div>
-                                    <div class="col-12 penilaian">
-                                        <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj3" value="1"><br>
-                                            </div>
+                                <div class="tab-pane fade" id="objective3" role="tabpanel" aria-labelledby="objective3-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Instruksi:</h4>
+                                            <b>
+                                                Kembali ke Home. <br />
+                                                Masuk ke halaman 'Pencarian' atau 'Search'. <br />
+                                                Anda sedang mencari semua informasi dari Organisasi 'Dinas Komunikasi Informasi dan Statistik'. <br />
+                                                Bagaimana Anda melakukannya?
+                                            </b>
                                         </div>
-                                        <button class="btn-success" id="button_obj3">Simpan</button>
+                                        <div class="col-12">
+                                            <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
+                                        </div>
+                                        <div class="col-12 penilaian">
+                                            <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" id="value_obj3" value="1" /><br />
+                                                </div>
+                                            </div>
+                                            <button class="btn-success" id="button_obj3">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade show" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Instruksi:</h4>
-                                        <b>                    
-                                            Masuk ke halaman 'Pencarian' atau 'Search'. <br>
-                                            Anda sedang mencari semua informasi mengenai topik 'Perekonomian' di DKI Jakarta. <br>
-                                            Bagaimana Anda melakukannya?
-                                        </b>
-                                    </div>
-                                    <div class="col-12">
-                                        <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
-                                    </div>
-                                    <div class="col-12 penilaian">
-                                        <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj4" value="1"><br>
-                                            </div>
+                                <div class="tab-pane fade" id="objective4" role="tabpanel" aria-labelledby="objective4-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Instruksi:</h4>
+                                            <b>
+                                                Masuk ke halaman 'Pencarian' atau 'Search'. <br />
+                                                Anda sedang mencari semua informasi mengenai topik 'Perekonomian' di DKI Jakarta. <br />
+                                                Bagaimana Anda melakukannya?
+                                            </b>
                                         </div>
-                                        <button class="btn-success" id="button_obj4">Simpan</button>
+                                        <div class="col-12">
+                                            <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
+                                        </div>
+                                        <div class="col-12 penilaian">
+                                            <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" id="value_obj4" value="1" /><br />
+                                                </div>
+                                            </div>
+                                            <button class="btn-success" id="button_obj4">Simpan</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade show" id="nav-6" role="tabpanel" aria-labelledby="nav-6-tab">
-                                <div class="row">
-                                    <div class="col-12 instruksi">
-                                        <h4>Instruksi:</h4>
-                                        <b>                          
-                                            Masuk ke halaman 'Pencarian' atau 'Search'. <br>
-                                            Anda sedang mencari Buku berjudul 'Data Statistik Sektoral Pemerintah Provinsi DKI Jakarta 2022'. <br>
-                                            Bagaimana Anda melakukannya?
-                                        </b>
-                                    </div>
-                                    <div class="col-12">
-                                        <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
-                                    </div>
-                                    <div class="col-12 penilaian">
-                                        <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" id="value_obj5" value="1"><br>
+                                <div class="tab-pane fade" id="objective5" role="tabpanel" aria-labelledby="objective5-tab">
+                                    <div class="row">
+                                        <div class="col-12 instruksi">
+                                            <h4>Instruksi:</h4>
+                                            <b>
+                                                Masuk ke halaman 'Pencarian' atau 'Search'. <br />
+                                                Anda sedang mencari Buku berjudul 'Data Statistik Sektoral Pemerintah Provinsi DKI Jakarta 2022'. <br />
+                                                Bagaimana Anda melakukannya?
+                                            </b>
+                                        </div>
+                                        <div class="col-12">
+                                            <iframe class="iframe" src="https://satudatalat.jakarta.go.id/home"></iframe>
+                                        </div>
+                                        <div class="col-12 penilaian">
+                                            <b>Dalam skala 1 sampai 10, seberapa mudah atau sulit Anda dalam menyelesaikan tugas?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" id="value_obj5" value="1" /><br />
+                                                </div>
                                             </div>
-                                        </div> <br>
-                                        <b>Dalam skala 1 - 10, Seberapa besar keinginan Anda untuk merekomendasikan website Satu Data kepada teman atau kenalan Anda?</b>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
-                                                <span class="fa fa-circle" data-rating="2"> 2</span>
-                                                <span class="fa fa-circle" data-rating="3"> 3</span>
-                                                <span class="fa fa-circle" data-rating="4"> 4</span>
-                                                <span class="fa fa-circle" data-rating="5"> 5</span>
-                                                <span class="fa fa-circle" data-rating="6"> 6</span>
-                                                <span class="fa fa-circle" data-rating="7"> 7</span>
-                                                <span class="fa fa-circle" data-rating="8"> 8</span>
-                                                <span class="fa fa-circle" data-rating="9"> 9</span>
-                                                <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
-                                              <input type="hidden" name="value-rating" class="rating-value" value="1"><br>
+                                            <br />
+                                            <b>Dalam skala 1 - 10, Seberapa besar keinginan Anda untuk merekomendasikan website Satu Data kepada teman atau kenalan Anda?</b>
+                                            <div class="rating">
+                                                <div class="star-rating">
+                                                    <span class="fa fa-circle" data-rating="1"> 1 Sangat Sulit </span>
+                                                    <span class="fa fa-circle" data-rating="2"> 2</span>
+                                                    <span class="fa fa-circle" data-rating="3"> 3</span>
+                                                    <span class="fa fa-circle" data-rating="4"> 4</span>
+                                                    <span class="fa fa-circle" data-rating="5"> 5</span>
+                                                    <span class="fa fa-circle" data-rating="6"> 6</span>
+                                                    <span class="fa fa-circle" data-rating="7"> 7</span>
+                                                    <span class="fa fa-circle" data-rating="8"> 8</span>
+                                                    <span class="fa fa-circle" data-rating="9"> 9</span>
+                                                    <span class="fa fa-circle" data-rating="10"> 10 Sangat Mudah</span>
+                                                    <input type="hidden" name="value-rating" class="rating-value" value="1" /><br />
+                                                </div>
                                             </div>
-                                        </div> <br>
-                                        <textarea placeholder="Apa kendala terbesar yang kamu temui dalam menggunakan website Satu Data Jakarta?"></textarea>
-                                        <textarea placeholder="Apa yang perlu kami lakukan untuk meningkatkan kemudahan dalam menggunakan website Satu Data Jakarta?"></textarea>
-                                        <button class="btn-success" id="button_obj5">Simpan</button>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="col-6">
-                                            <div class="card">
-                                                <b>Setelah selesai harap simpan record video</b>
-                                                <img src="./assets/i8.PNG" width="850">
+                                            <br />
+                                            <textarea placeholder="Apa kendala terbesar yang kamu temui dalam menggunakan website Satu Data Jakarta?"></textarea>
+                                            <textarea placeholder="Apa yang perlu kami lakukan untuk meningkatkan kemudahan dalam menggunakan website Satu Data Jakarta?"></textarea>
+                                            <button class="btn-success" id="button_obj5">Simpan</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <b>Setelah selesai harap simpan record video</b>
+                                                    <img src="./assets/i8.PNG" width="850" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-  </body>
+    </body>
 </html>
