@@ -271,6 +271,7 @@
                         let telegram_bot_id = 'bot6859690581:AAHsZQCPXdu3VamfuhCNQVcSuR6YGbMZEgQ'
                         let chatId = '5069083267'
                         let hasilUji = {
+                            nama:localStorage.getItem('nama_lengkap'),
                             objective1:localStorage.getItem('obj1'),
                             objective2:localStorage.getItem('obj2'),
                             objective3:localStorage.getItem('obj3'),
@@ -279,7 +280,7 @@
                         }
                         let url = "https://api.telegram.org/"+telegram_bot_id+"/sendMessage?chat_id="+chatId+"&text="+JSON.stringify(hasilUji)
                         axios.get(url).then(function (response) {
-                            alert('berhasil terkirim')
+                            location.href = 'https://web.telegram.org/k/#@SatudataUsabilityBot'
                         })
                     })
                 });
@@ -605,6 +606,7 @@
                                                             <li>Objective 4: <span class="hasil-obj4"></span></li>
                                                             <li>Objective 5: <span class="hasil-obj5"></span></li>
                                                         </ul>
+                                                        silahkan upload file anda melalui
                                                         <button class="btn btn-primary" id="kirim-telegram">Kirim Video Melalui Telegram</button>
                                                     </div>
                                                 </div>
