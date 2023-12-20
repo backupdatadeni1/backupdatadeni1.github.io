@@ -167,34 +167,56 @@
                 $(".clear6").hide();
                 $("#hapus-sesi").hide();
 
+                $("#objective1-tab").prop('disabled', true);
+                $("#objective2-tab").prop('disabled', true);
+                $("#objective3-tab").prop('disabled', true);
+                $("#objective4-tab").prop('disabled', true);
+                $("#objective5-tab").prop('disabled', true);
+
                 if(localStorage.getItem('nama_lengkap')){
-                    $(".clear1").show();
-                    $("#nama_lengkap").val(localStorage.getItem('nama_lengkap'));
-                    $("#nama_lengkap").prop('disabled', true);
-                    $("#submit-biodata").prop('disabled', true);
+                    if(localStorage.getItem('nama_lengkap')){
+                        $(".clear1").show();
+                        $("#nama_lengkap").val(localStorage.getItem('nama_lengkap'));
+                        $("#nama_lengkap").prop('disabled', true);
+                        $("#submit-biodata").prop('disabled', true);
+                        $("#objective1-tab").prop('disabled', false);
+                    }
                 }
                 if(localStorage.getItem('obj1')){
-                    $(".clear2").show();
-                    $("#button_obj1").prop('disabled', true);
-                    $('.hasil-obj1').text(localStorage.getItem('obj1'))
+                    if(localStorage.getItem('obj1')){
+                        $(".clear2").show();
+                        $("#button_obj1").prop('disabled', true);
+                        $('.hasil-obj1').text(localStorage.getItem('obj1'))
+                        $("#objective2-tab").prop('disabled', false);
+                    }
 
                 }
                 if(localStorage.getItem('obj2')){
-                    $(".clear3").show();
-                    $("#button_obj2").prop('disabled', true);
-                    $('.hasil-obj2').text(localStorage.getItem('obj2'))
+                    if(localStorage.getItem('obj2')){
+                        $(".clear3").show();
+                        $("#button_obj2").prop('disabled', true);
+                        $('.hasil-obj2').text(localStorage.getItem('obj2'))
+                        $("#objective3-tab").prop('disabled', false);
+                    }
                 }
 
                 if(localStorage.getItem('obj3')){
-                    $(".clear4").show();
-                    $("#button_obj3").prop('disabled', true);
-                    $('.hasil-obj3').text(localStorage.getItem('obj3'))
+                    if(localStorage.getItem('obj3')){
+                        $(".clear4").show();
+                        $("#button_obj3").prop('disabled', true);
+                        $('.hasil-obj3').text(localStorage.getItem('obj3'))
+                        $("#objective4-tab").prop('disabled', false);
+                    }
+                    
                 }
 
                 if(localStorage.getItem('obj4')){
-                    $(".clear5").show();
-                    $("#button_obj4").prop('disabled', true);
-                    $('.hasil-obj4').text(localStorage.getItem('obj4'))
+                    if(localStorage.getItem('obj4')){
+                        $(".clear5").show();
+                        $("#button_obj4").prop('disabled', true);
+                        $('.hasil-obj4').text(localStorage.getItem('obj4'))
+                        $("#objective5-tab").prop('disabled', false);
+                    }
                 }
 
                 if(localStorage.getItem('obj5')){
@@ -232,44 +254,56 @@
 
                 $(document).ready(function () {
                     $("#submit-biodata").click(function (event) {
-                        localStorage.setItem("nama_lengkap", $("#nama_lengkap").val());
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective1'
-                        location.reload()
+                        if($("#nama_lengkap").val()){
+                            localStorage.setItem("nama_lengkap", $("#nama_lengkap").val());
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective1'
+                            location.reload()
+                        }
                     });
                     $("#button_obj1").click(function (event) {
-                        localStorage.setItem("obj1", $("#value_obj1").val());
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective2'
-                        location.reload()
+                        if($("#value_obj1").val() != '1'){
+                            localStorage.setItem("obj1", $("#value_obj1").val());
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective2'
+                            location.reload()
+                        }
                     });
                     $("#button_obj2").click(function (event) {
-                        localStorage.setItem("obj2", $("#value_obj2").val());
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective3'
-                        location.reload()
+                        if($("#value_obj2").val() != '1'){
+                            localStorage.setItem("obj2", $("#value_obj2").val());
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective3'
+                            location.reload()
+                        }
                     });
                     $("#button_obj3").click(function (event) {
-                        localStorage.setItem("obj3", $("#value_obj3").val());
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective4'
-                        location.reload()
+                        if($("#value_obj3").val() != '1'){
+                            localStorage.setItem("obj3", $("#value_obj3").val());
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective4'
+                            location.reload()
+                        } 
                     });
                     $("#button_obj4").click(function (event) {
-                        localStorage.setItem("obj4", $("#value_obj4").val());
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective5'
-                        location.reload()
+                        if($("#value_obj4").val() != '1'){
+                            localStorage.setItem("obj4", $("#value_obj4").val());
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective5'
+                            location.reload()
+                        }
                     });
                     $("#button_obj5").click(function (event) {
-                        localStorage.setItem("obj5", $("#value_obj5").val());
-                        localStorage.setItem("obj6", $("#value_obj6").val());
-                        localStorage.setItem("saran1", $("#saran1").val());
-                        localStorage.setItem("saran2", $("#saran2").val());
-                        
-                        const url = rootDomain(window.location.href)
-                        location.href = url+'#objective5'
-                        location.reload()
+                        if($("#value_obj5").val() != '1'){
+                            localStorage.setItem("obj5", $("#value_obj5").val());
+                            localStorage.setItem("obj6", $("#value_obj6").val());
+                            localStorage.setItem("saran1", $("#saran1").val());
+                            localStorage.setItem("saran2", $("#saran2").val());
+                            
+                            const url = rootDomain(window.location.href)
+                            location.href = url+'#objective5'
+                            location.reload()
+                        }
                     });
                     $("#hapus-sesi").click(function (event) {
                         localStorage.clear()
@@ -292,7 +326,7 @@
                         }
                         let url = "https://api.telegram.org/"+telegram_bot_id+"/sendMessage?chat_id="+chatId+"&text="+JSON.stringify(hasilUji)
                         axios.get(url).then(function (response) {
-                            location.href = 'https://web.telegram.org/k/#748601721'
+                            location.href = 'https://t.me/+6282281420882'
                         })
                     })
                 });
@@ -356,46 +390,11 @@
                                                         <img src="https://cdn.icon-icons.com/icons2/2552/PNG/512/edge_browser_logo_icon_152998.png" style="width: 20px;" /> Download Extension Untuk Microsoft Edge
                                                     </a>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-12">
                                                     <div class="card">
-                                                        <b>1</b>
-                                                        <img src="./assets/i1.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>2</b>
-                                                        <img src="./assets/i2.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>3</b>
-                                                        <img src="./assets/i3.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>4</b>
-                                                        <img src="./assets/i4.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>5</b>
-                                                        <img src="./assets/i5.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>6</b>
-                                                        <img src="./assets/i6.PNG" width="850" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="card">
-                                                        <b>7</b>
-                                                        <img src="./assets/i7.PNG" width="850" />
+                                                        <div class="embed-responsive embed-responsive-16by9">
+                                                            <iframe class="embed-responsive-item" src="./assets/video.mp4" allowfullscreen></iframe>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -403,7 +402,7 @@
                                         <div class="col-12 data-diri">
                                             <b>Masukan nama anda</b>
                                             <div class="mb-3">
-                                                <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap" />
+                                                <input type="text" class="form-control" id="nama_lengkap" aria-describedby="emailHelp" placeholder="Nama Lengkap" required/>
                                             </div>
                                             <button class="btn btn-success" type="submit" id="submit-biodata">Simpan</button>
                                             <button class="btn btn-danger" type="submit" id="hapus-sesi">Hapus Semua Sesi</button>
